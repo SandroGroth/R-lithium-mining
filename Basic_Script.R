@@ -2,9 +2,10 @@ library(RStoolbox)
 library(raster)
 library(rgdal)
 library(leaflet)
+source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/mndwi.R")
 
 setwd("/home/sandro/Desktop/LS_Atacama")
-out_path <- "/home/sandro/Desktop/MNDWI"
+out_path <- "/home/sandro/Desktop/MNDWI/Study_Area"
 
 study_area_shp <- readOGR("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/vector/Study_Area.shp")
 mining_area_shp <- readOGR("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/vector/Mining_Areas.shp")
@@ -12,19 +13,26 @@ reserve_area_shp <- readOGR("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term
 
 study_area <- subset(study_area_shp, id==1)
 
-dirs <- list.dirs()
-i <- 0
-while (i < length(dirs)) {
-  if (i > 1) {
-    act_dir <- dirs[i]
-    all_bands <- list.files(act_dir, pattern = ".TIF", full.names = T)
-    l_GREEN <- brick(all_bands[5])
-    l_SWIR2 <- brick(all_bands[9])
-    ndwi_stack <- stack(l_GREEN, l_SWIR2)
-    mndwi <- spectralIndices(ndwi_stack, green = 1, swir2 = 2, indices = "MNDWI")
-    mndwi_masked <- mask(mndwi, study_area)
-    plot(mndwi_masked)
-    writeRaster(mndwi_masked, paste0(out_path, "/MNDVI", as.character(i), ".tif"), format = "GTiff", overwrite = T)
-  }
-  i <- i + 1
+dirs <- list.dirs(full.names = TRUE)
+dirs <- dirs[-1] # remove first element "."
+
+mndwis <- lapply(dirs, mndwi)
+mndwis_study_area <- lapply(mndwis, mask, mask = study_area)
+
+i <- 1
+for (i in 1:length(mndwis_study_area)) {
+  sensor <- substring(dirs[i], 3, 6)
+  year <- substring(dirs[i], 20, 27)
+  writeRaster(mndwis_study_area[[i]], paste0(out_path, "/MNDWI_Study_Area", "_", year, "_", sensor, ".tif"),
+              format = "GTiff", overwrite = TRUE)
+  print(paste0("Year processed: ", year))
+}
+
+# Get MNDWI time series and mask it to Study area
+i = 2 # because first element is "."
+par(mfrow=c(3, 10))
+for (i in length(dirs)-1) {
+  mndwi_res <- mndwi(dirs[i])
+  mndwi_masked <- mask(mndwi_res, study_area)
+  plot(mndwi_masked)
 }
