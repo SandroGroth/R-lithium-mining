@@ -3,6 +3,7 @@ library(raster)
 library(rgdal)
 library(leaflet)
 source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/mndwi.R")
+source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/clip.R")
 
 setwd("/home/sandro/Desktop/LS_Atacama")
 out_path <- "/home/sandro/Desktop/MNDWI/Study_Area"
@@ -17,7 +18,7 @@ dirs <- list.dirs(full.names = TRUE)
 dirs <- dirs[-1] # remove first element "."
 
 mndwis <- lapply(dirs, mndwi)
-mndwis_study_area <- lapply(mndwis, mask, mask = study_area)
+mndwis_study_area <- lapply(mndwis, clip, feature = study_area)
 
 # Export
 i <- 1
