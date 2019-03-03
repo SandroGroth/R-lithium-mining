@@ -19,6 +19,7 @@ dirs <- dirs[-1] # remove first element "."
 mndwis <- lapply(dirs, mndwi)
 mndwis_study_area <- lapply(mndwis, mask, mask = study_area)
 
+# Export
 i <- 1
 for (i in 1:length(mndwis_study_area)) {
   sensor <- substring(dirs[i], 3, 6)
@@ -26,13 +27,4 @@ for (i in 1:length(mndwis_study_area)) {
   writeRaster(mndwis_study_area[[i]], paste0(out_path, "/MNDWI_Study_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
-}
-
-# Get MNDWI time series and mask it to Study area
-i = 2 # because first element is "."
-par(mfrow=c(3, 10))
-for (i in length(dirs)-1) {
-  mndwi_res <- mndwi(dirs[i])
-  mndwi_masked <- mask(mndwi_res, study_area)
-  plot(mndwi_masked)
 }
