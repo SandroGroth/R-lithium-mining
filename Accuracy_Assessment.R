@@ -2,6 +2,7 @@ library(raster)
 library(RStoolbox)
 library(rgdal)
 source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/func/confusionMatrix.R")
+source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/func/overallAccuracy.R")
 
 # Prepare NDWI image
 ndwi_img <- brick("/home/sandro/Desktop/NDWI/Reserve_Area/NDWI_Reserve_Area_2018_LC08.tif")
@@ -19,5 +20,4 @@ ndwi_masked <- mask(ndwi_img, val_ras, maskvalue = NA, updatevalue = NA)
 
 confusion_matrix <- confusionMatrix(val_ras, ndwi_masked)
 
-overall_acc <- (true_positive + true_negative) / (true_positive + true_negative + false_negative + false_positive)
-overall_acc
+acc <- overallAccuracy(confusion_matrix, in_percent = TRUE)
