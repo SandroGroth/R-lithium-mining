@@ -32,18 +32,18 @@ i <- 1
 for (i in 1:length(ndmis_study_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndmis_study_area[[i]], paste0(out_path, "/Study_Area/NDMI_Study_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndmis_study_area[[i]], paste0(out_path, "/Study_Area/raw/NDMI_Study_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }
 
 # Export NDMI for Mining Area
 ndmis_mining_area <- lapply(ndmis, clip, feature = mining_area)
-i <- 5
+i <- 1
 for (i in 1:length(ndmis_mining_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndmis_mining_area[[i]], paste0(out_path, "/Mining_Area/NDMI_Mining_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndmis_mining_area[[i]], paste0(out_path, "/Mining_Area/raw/NDMI_Mining_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }
@@ -54,7 +54,7 @@ i <- 1
 for (i in 1:length(ndmis_reserve_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndmis_reserve_area[[i]], paste0(out_path, "/Reserve_Area/NDMI_Reserve_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndmis_reserve_area[[i]], paste0(out_path, "/Reserve_Area/raw/NDMI_Reserve_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }

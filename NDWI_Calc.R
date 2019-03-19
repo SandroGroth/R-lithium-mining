@@ -31,7 +31,7 @@ i <- 1
 for (i in 1:length(ndwis_study_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndwis_study_area[[i]], paste0(out_path, "/Study_Area/NDWI_Study_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndwis_study_area[[i]], paste0(out_path, "/Study_Area/raw/NDWI_Study_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }
@@ -42,7 +42,7 @@ i <- 5
 for (i in 1:length(ndwis_mining_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndwis_mining_area[[i]], paste0(out_path, "/Mining_Area/NDWI_Mining_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndwis_mining_area[[i]], paste0(out_path, "/Mining_Area/raw/NDWI_Mining_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }
@@ -53,7 +53,7 @@ i <- 1
 for (i in 1:length(ndwis_reserve_area)) {
   sensor <- substring(dirs[i], 3, 6)
   year <- getYear(dirs[i])
-  writeRaster(ndwis_reserve_area[[i]], paste0(out_path, "/Reserve_Area/NDWI_Reserve_Area", "_", year, "_", sensor, ".tif"),
+  writeRaster(ndwis_reserve_area[[i]], paste0(out_path, "/Reserve_Area/raw/NDWI_Reserve_Area", "_", year, "_", sensor, ".tif"),
               format = "GTiff", overwrite = TRUE)
   print(paste0("Year processed: ", year))
 }

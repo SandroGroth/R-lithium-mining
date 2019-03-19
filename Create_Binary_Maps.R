@@ -7,7 +7,7 @@ source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Ima
 
 # Calculate binary map and safe it to new folder
 ndwi_files <- list.files(path = "/home/sandro/Desktop/NDWI/Reserve_Area/raw", pattern = ".tif", full.names = TRUE, no.. = TRUE)
-out_folder <- "/home/sandro/Desktop/NDWI/Reserve_Area/threshold_0_01"
+out_folder <- "/home/sandro/Desktop/NDWI/Reserve_Area/threshold_0_05"
 threshold <- 0.05
 for (i in 1:length(ndwi_files)) {
   ndwi_ras <- brick(ndwi_files[i])
