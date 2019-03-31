@@ -8,7 +8,7 @@ classif_raster <- brick("/home/sandro/Desktop/NDWI/Reserve_Area/threshold_0_05/B
 unique_classes <- unique(val_polygon_shp$class_name)
 
 # Extracting classified values from raster and append to shapefile
-set.seed(25)
+set.seed(47)
 xy_val <- lapply(unique_classes, function(class) {
   class_data <- subset(val_polygon_shp, class_name == class)
   classpts <- spsample(class_data, type = "random", n = 100)

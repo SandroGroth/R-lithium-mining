@@ -22,9 +22,7 @@ for (i in 1:length(files)) {
 moist_area_plot <- ggplot(data = area_df, aes(x = year, y = a_wet, group = 1)) + 
   geom_line(data = area_df, aes(x = year, y = a_wet), color = "#00B0FF") +
   geom_smooth(method = "lm", se = F, color = "#5D65AB", size = 0.3) +
-  labs(x = "Year", y = "Area in km²", title = "Moist surface area in the Soncor Ecosystem, Salar de 
-       Atacama (1989-2018)", 
-       caption = "(Data: NDMI calculated on Landsat 4, 5 and 8 imagery)") +
+  labs(x = "Year", y = "Area in km²") +
   theme_classic(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, margin = margin(10,0,0,0)))
@@ -34,9 +32,7 @@ moist_area_plot
 water_area_plot <- ggplot(data = area_df, aes(x = year, y = a_open_water, group = 1)) + 
   geom_line(data = area_df, aes(x = year, y = a_open_water), color = "#000AE2") +
   geom_smooth(method = "lm", se = F, color = "#5D65AB", size = 0.3) +
-  labs(x = "Year", y = "Area in km²", title = "Open water area in the Soncor Ecosystem, Salar de 
-       Atacama (1989-2018)", 
-       caption = "(Data: NDWI calculated on Landsat 4, 5 and 8 imagery)") +
+  labs(x = "Year", y = "Area in km²") +
   theme_classic(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, margin = margin(10,0,0,0)))
@@ -46,9 +42,7 @@ water_area_plot
 combined_graph <- ggplot(data = area_df, aes(x = year, y = a_wet, group = 1)) + 
   geom_line(data = area_df, aes(x = year, y = a_wet), color = "#00B0FF") +
   geom_smooth(method = "lm", se = F, color = "#5D65AB", size = 0.3) +
-  labs(x = "Year", y = "Moist Surface Area (km²)", title = "Moist surface area in the Soncor Ecosystem, Salar de 
-       Atacama (1989-2018)", 
-       caption = "(Data: NDMI calculated on Landsat 4, 5 and 8 imagery)") +
+  labs(x = "Year", y = "Moist Surface Area (km²)") +
   theme_classic(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, margin = margin(10,0,0,0))) +

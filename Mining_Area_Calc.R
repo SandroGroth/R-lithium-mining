@@ -20,10 +20,13 @@ for (i in 1989:2018) {
 }
 
 area_df[,3] <- cumsum(area_df[ ,2])
+area_total <- sum(area_df[,2])
 
 ggplot(data = area_df) +
-  geom_line(aes(x = area_df$year, y= area_df$a_cumulative, color = "a_cumulative")) +
-  geom_line(aes(x = area_df$year, y= area_df$a_ponds, color = "a_ponds"))
+  geom_area(aes(x = area_df$year, y= area_df$a_cumulative, color = "Evaporation Ponds"))+
+  labs(x = "Year", y = "Area in km²", colour = "Legend", title = "Area of mining evaporation ponds in the Salar de Atacama (1989 - 2018)")+
+  theme_classic(base_size = 15)+
+  theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 45, margin = margin(10,0,0,0)))
 
 #########################################################################################################
 source("/home/sandro/Documents/EAGLE_Data/WS201819_1st_Term/04GEOMB1_Digital_Image_Analysis/FInal_Project/R/R-lithium-mining/func/getArea.R")
